@@ -90,8 +90,12 @@ export default class Game {
   }
 
   updateCamera = () => {
-    const width = window.screen ? window.screen.width : window.innerWidth
-    const height = window.screen ? window.screen.height : window.innerHeight
+    const widths = [window.innerWidth]
+    window.screen && widths.push(window.screen.width)
+    const width = Math.min(...widths)
+    const heights = [window.innerHeight]
+    window.screen && heights.push(window.screen.height)
+    const height = Math.min(...heights)
     this.renderer.setSize(width, height, true)
     this.camera.aspect = width / height
     this.camera.updateProjectionMatrix()
