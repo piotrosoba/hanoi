@@ -53,7 +53,6 @@ export default class Game {
     light.shadow.camera.left = -10
     light.shadow.camera.right = 10
     light.shadow.camera.top = 10
-    window.light = light
 
     this.scene.add(light)
   }
@@ -91,8 +90,10 @@ export default class Game {
   }
 
   updateCamera = () => {
-    this.renderer.setSize(window.innerWidth, window.innerHeight, true)
-    this.camera.aspect = window.innerWidth / window.innerHeight
+    const width = window.screen ? window.screen.width : window.innerWidth
+    const height = window.screen ? window.screen.height : window.innerHeight
+    this.renderer.setSize(width, height, true)
+    this.camera.aspect = width / height
     this.camera.updateProjectionMatrix()
   }
 
